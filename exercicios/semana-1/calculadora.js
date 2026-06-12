@@ -17,7 +17,12 @@ function dividir(a, b) {
     return a / b;
 }
 
+function porcentagem(valor, percent) {
+    return (valor * percent) / 100;
+}
+
 // Testes manuais
+console.log("20% de 150 =", porcentagem(150, 20));
 console.log("2 + 3 =", somar(2, 3));
 console.log("10 - 4 =", subtrair(10, 4));
 console.log("5 * 6 =", multiplicar(5, 6));
