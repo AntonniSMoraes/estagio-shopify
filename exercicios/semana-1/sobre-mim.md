@@ -1,0 +1,5 @@
+# Sobre Mim
+- **Nome:** Antonni da Silva Moraes
+- **Cidade:** Alegrete - RS
+- **Por que escolhi desenvolvimento web:** Antes de começar o ensino superior, gostava de desenvolver jogos e da sensação de vê-los sendo executados em diversas plataformas. Após começar a universidade, aprendi diversas novas tecnologias, e entre elas, as necessárias para criação de páginas web. Desenvolver páginas Web para sanar diversos problemas do dia-a-dia traziam a mesma sensação de satisfação que me fez buscar o aprendizado, além de ser mais viável trabalhar com equipes pequenas, por isso decidi seguir por esse meio.
+- **O que espero aprender neste programa:** Espero aprender tecnologias emergentes no mercado de trabalho, além de aprimorar minhas soft e hardskills, participando do fluxo completo da atuação em equipe no desenvolvimento de novas aplicações.
