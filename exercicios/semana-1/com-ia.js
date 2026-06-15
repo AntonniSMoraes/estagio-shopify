@@ -50,4 +50,4 @@ function removerDuplicados(arr) {
 console.log(removerDuplicados([1, 2, 2, 3, 3, 4])); // Output: [1, 2, 3, 4]
 
 // Tempo de fim: 02:46
-// Tempo total COM IA: ___ minutos
+// Tempo total COM IA: 1 minutos
