@@ -1,0 +1,173 @@
+{% schema %}
+{
+  "name": "Exercício Filtros Liquid",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "colecao",
+      "label": "Coleção para exibir"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Exercício Filtros Liquid"
+    }
+  ]
+}
+{% endschema %}
+<section class="exercicio-filtros">
+  {% if section.settings.colecao != blank %}
+    {% assign colecao = collections[section.settings.colecao] %}
+    <h2>{{ colecao.title | upcase }}</h2>
+    <p>Total de produtos: {{ colecao.products.size }}</p>
+
+    {% assign produtos_em_promocao = 0 %}
+
+    {% comment %} Tarefa 1 {% endcomment %}
+    <div class="produtos-container">
+      {% for produto in colecao.products %}
+        {% assign esta_em_promocao = false %}
+
+        <div class="produto-card">
+          {% comment %} Tarefa 2 {% endcomment %}
+          {% if produto.compare_at_price > produto.price %}
+            {%- assign valor_economizado = produto.compare_at_price | minus: produto.price -%}
+            {%- assign multiplicado_por_cem = valor_economizado | times: 100 -%}
+            {%- assign com_desconto = multiplicado_por_cem | divided_by: produto.compare_at_price | floor -%}
+
+            <span class="badge-promocao">Em promoção {{ com_desconto }}% OFF</span>
+
+            {% assign esta_em_promocao = true %}
+            {% assign produtos_em_promocao = produtos_em_promocao | plus: 1 %}
+          {% endif %}
+
+          {% if produto.available == true and esta_em_promocao == false %}
+            <span class="badge-disponivel">Disponivel</span>
+          {% endif %}
+
+          {% if produto.available == false %}
+            <span class="badge-esgotado">Esgotado</span>
+          {% endif %}
+
+          <img src="{{ produto.featured_image | image_url: width: 300 }}" alt="{{ produto.title }}">
+          <h3>{{ produto.title | capitalize }}</h3>
+          <p class="descricao">{{ produto.description | strip_html | truncate: 100 }}</p>
+          {% if esta_em_promocao %}
+            <s>{{ produto.compare_at_price | money }}</s>
+            <p class="preco">{{ produto.price | money }}</p>
+          {% else %}
+            <p class="preco">{{ produto.price | money }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    {% capture resumo %}
+      A coleção "{{ colecao.title }}" tem {{ colecao.products.size }} produtos,
+      sendo {{ produtos_em_promocao }} em promoção.
+    {% endcapture %}
+    <p class="resumo">{{ resumo }}</p>
+  {% else %}
+
+  {% else %}
+    <p class="sem-colecao">Selecione uma coleção nas configurações da seção.</p>
+  {% endif %}
+</section>
+<style>
+  .exercicio-filtros {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  .exercicio-filtros h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .exercicio-filtros .produtos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .produto-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    transition: box-shadow 0.3s;
+  }
+  .produto-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .produto-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  .produto-card h3 {
+    margin: 0.75rem 0 0.25rem;
+    font-size: 1rem;
+  }
+  .produto-card .descricao {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  .produto-card .preco {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  .produto-card .preco-original {
+    color: #999;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
+  .badge-promocao {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e74c3c;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+  .badge-esgotado {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #95a5a6;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+  .badge-disponivel {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #27ae60;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+  .resumo {
+    text-align: center;
+    color: #555;
+    font-style: italic;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 4px;
+  }
+  .sem-colecao {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+  }
+</style>
