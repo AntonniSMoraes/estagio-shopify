@@ -36,6 +36,12 @@
         { "value": "list", "label": "Lista" }
       ],
       "default": "grid"
+    },
+    {
+      "type": "color",
+      "id": "cor_fundo",
+      "label": "Cor de fundo da seção",
+      "default": "#fff"
     }
   ],
   "presets": [
@@ -45,7 +51,7 @@
   ]
 }
 {% endschema %}
-<section class="exercicio-basico">
+<section class="exercicio-basico" style="background-color: {{ section.settings.cor_fundo }};">
   {% comment %} Tarefa 1 {% endcomment %}
   <h2>{{ section.settings.titulo }}</h2>
   
